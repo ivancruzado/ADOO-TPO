@@ -2,38 +2,22 @@ package Concreto;
 
 import java.util.*;
 
-/**
- * 
- */
 public abstract class Notificador {
 
-    /**
-     * Default constructor
-     */
+    private StrategyNotificador estrategiaNotificador;
     public Notificador() {
     }
 
-    /**
-     * 
-     */
-    private StrategyNotificador estrategiaNotificador;
+    public void enviarNotificacion(notificacion NotificadorDTO) {
+        if(estrategiaNotificador != null){
+            estrategiaNotificador.enviarNotificacion(notificacion);
+        }else{
+            System.out.println("No se setio una estrategia de notificacion");
+        }
 
-    /**
-     * @param notificacion NotificadorDTO 
-     * @return
-     */
-    public void enviarNotificacion(void notificacion NotificadorDTO) {
-        // TODO implement here
-        return null;
     }
-
-    /**
-     * @param estrategiaNotificacion EstrategiaNotificador 
-     * @return
-     */
-    public void setearEstrategia(void estrategiaNotificacion EstrategiaNotificador) {
-        // TODO implement here
-        return null;
+    public void setearEstrategia(estrategiaNotificacion EstrategiaNotificador) {
+        this.estrategiaNotificador = estrategiaNotificador;
     }
 
 }
