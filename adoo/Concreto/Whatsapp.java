@@ -7,24 +7,16 @@ import java.util.*;
  */
 public class Whatsapp extends Notificador {
 
-    /**
-     * Default constructor
-     */
-    public Whatsapp() {
-    }
-
-    /**
-     * 
-     */
     private NotificadorWhatsapp adapter;
-
-    /**
-     * @param notificacion NotificadorDTO 
-     * @return
-     */
-    public void enviarNotificacion(void notificacion NotificadorDTO) {
-        // TODO implement here
-        return null;
+    public Whatsapp(NotificadorWhatsapp adapter) {
+        this.adapter = adapter;
     }
+
+    public void enviarNotificacion(notificacion NotificadorDTO) {
+        if(adapter != null){
+            adapter.enviarNotificacion(notificacion);
+        }else{
+            System.out.println("No hay un adapter seteado");
+        }
 
 }

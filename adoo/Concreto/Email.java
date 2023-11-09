@@ -7,29 +7,16 @@ import java.util.*;
  */
 public class Email extends Notificador {
 
-    /**
-     * Default constructor
-     */
-    public Email() {
-    }
-
-    /**
-     * 
-     */
-    public void Attribute1;
-
-    /**
-     * 
-     */
     private NotificadorEmail adapter;
-
-    /**
-     * @param notificacion NotificadorDTO 
-     * @return
-     */
-    public void enviarNotificacion(void notificacion NotificadorDTO) {
-        // TODO implement here
-        return null;
+    public Email(NotificadorEmail adapter) {
+        this.adapter = adapter;
+    }
+    public void enviarNotificacion(notificacion NotificadorDTO) {
+        if(adapter!= null){
+            adapter.enviarNotificacion(notificacion);
+        }else{
+            System.out.println("No hay un adapter seteado");
+        }
     }
 
 }
