@@ -8,7 +8,7 @@ public class SMS extends Notificador {
     }
     private NotificadorSMS adapter;
 
-    public void enviarNotificacion(void notificacion NotificadorDTO) {
+    public void enviarNotificacion(notificacion NotificadorDTO) {
 
         return null;
     }

@@ -17,7 +17,7 @@ public class AdapterSMS {
      * @param notificacion NotificadorDTO 
      * @return
      */
-    public void enviarNotificacion(void notificacion NotificadorDTO) {
+    public void enviarNotificacion(notificacion NotificadorDTO) {
         // TODO implement here
         return null;
     }

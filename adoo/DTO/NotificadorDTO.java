@@ -1,7 +1,11 @@
 
 import java.util.*;
 
+/**
+ * 
+ */
 public class NotificadorDTO {
+
     private String mensaje;
     private Date fecha;
     private MotivoNotificacion motivoNotificacion;
