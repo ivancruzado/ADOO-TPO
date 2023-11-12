@@ -1,15 +1,9 @@
-
-import java.util.*;
+package interfaz;
 
 /**
  * 
  */
 public interface IModificacionDatos {
-
-    /**
-     * 
-     */
-    public void loggearCambios();
 
     /**
      * @return

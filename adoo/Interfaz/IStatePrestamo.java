@@ -1,7 +1,6 @@
+package interfaz;
 
-import java.util.*;
-
-import Concreto.Prestamo;
+import modelos.Prestamo;
 
 /**
  * 
