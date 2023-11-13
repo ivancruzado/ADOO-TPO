@@ -1,18 +1,11 @@
 package factory.ejemplar;
 
+import java.util.*;
 import modelos.Ejemplar;
 
 public class RevistaEspecializada extends Ejemplar {
 
-    /**
-     * Default constructor
-     */
-    public RevistaEspecializada() {
+    public RevistaEspecializada(String titulo, String autor, Date fechaPublicacion, int tiempoPrestamo) {
+        super(titulo, autor, fechaPublicacion, tiempoPrestamo);
     }
-
-    /**
-     * 
-     */
-    private int tiempoPrestamo = 5;
-
 }

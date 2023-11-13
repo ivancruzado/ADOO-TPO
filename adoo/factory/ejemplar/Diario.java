@@ -1,21 +1,13 @@
 package factory.ejemplar;
 
+import java.util.*;
 import modelos.Ejemplar;
 
-/**
- * 
- */
+
 public class Diario extends Ejemplar {
-
-    /**
-     * Default constructor
-     */
-    public Diario() {
+    
+    public Diario(String titulo, String autor, Date fechaPublicacion, int tiempoPrestamo) {
+        super(titulo, autor, fechaPublicacion, tiempoPrestamo);
     }
-
-    /**
-     * 
-     */
-    private int tiempoPrestamo = 5;
 
 }

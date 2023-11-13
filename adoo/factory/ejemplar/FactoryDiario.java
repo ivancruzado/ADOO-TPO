@@ -1,20 +1,13 @@
 package factory.ejemplar;
 
+import java.util.*;
+import modelos.Ejemplar;
 
-public class FactoryDiario extends Factory {
+public class FactoryDiario implements FactoryEjemplar {
+    private int tiempoPrestamo = 5;
 
-    /**
-     * Default constructor
-     */
-    public FactoryDiario() {
-    }
-
-    /**
-     * @return
-     */
-    public Diario crearEjemplar() {
-        // TODO implement here
-        return null;
+    public Ejemplar crearEjemplar(String titulo, String autor, Date fechaPublicacion) {
+        return new Diario(titulo, autor, fechaPublicacion, this.tiempoPrestamo);
     }
 
 }

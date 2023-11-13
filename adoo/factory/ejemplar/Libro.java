@@ -1,18 +1,11 @@
 package factory.ejemplar;
 
+import java.util.*;
 import modelos.Ejemplar;
 
 public class Libro extends Ejemplar {
 
-    /**
-     * Default constructor
-     */
-    public Libro() {
+    public Libro(String titulo, String autor, Date fechaPublicacion, int tiempoPrestamo) {
+        super(titulo, autor, fechaPublicacion, tiempoPrestamo);
     }
-
-    /**
-     * 
-     */
-    private int tiempoPrestamo = 10;
-
 }

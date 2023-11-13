@@ -1,20 +1,14 @@
 package factory.ejemplar;
 
+import java.util.*;
+import modelos.Ejemplar;
 
-public class FactoryRevistaEspecializada extends Factory {
+public class FactoryRevistaEspecializada implements FactoryEjemplar {
 
-    /**
-     * Default constructor
-     */
-    public FactoryRevistaEspecializada() {
-    }
+    private int tiempoPrestamo = 5;
 
-    /**
-     * @return
-     */
-    public RevistaEspecializada crearEjemplar() {
-        // TODO implement here
-        return null;
+    public Ejemplar crearEjemplar(String titulo, String autor, Date fechaPublicacion) {
+        return new RevistaEspecializada(titulo, autor, fechaPublicacion, this.tiempoPrestamo);
     }
 
 }

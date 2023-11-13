@@ -7,18 +7,31 @@ import java.util.*;
  */
 public abstract class Ejemplar {
 
-    /**
-     * Default constructor
-     */
-    public Ejemplar() {
-    }
-
+    private static int contadorIdEjemplar = 1; // Autoincremental
+    
     private int idEjemplar;
     private String titulo;
     private String autor;
     private Date fechaPublicacion;
     private int tiempoPrestamo;
     private Boolean prestado;
+
+    public Ejemplar(String titulo, String autor, Date fechaPublicacion, int tiempoPrestamo) {
+        this.idEjemplar = contadorIdEjemplar++;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.fechaPublicacion = fechaPublicacion;
+        this.tiempoPrestamo = tiempoPrestamo;
+        this.prestado = false;
+    }
+
+    public int getIdEjemplar() {
+        return idEjemplar;
+    }
+
+    public int getTiempoPrestamo(){
+        return this.tiempoPrestamo;
+    }
 
     /**
      * @param variable Tipo 
