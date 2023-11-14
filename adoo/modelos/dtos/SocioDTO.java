@@ -1,6 +1,7 @@
 package modelos.dtos;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import enums.MetodoEnvio;
 import modelos.Prestamo;
@@ -13,14 +14,14 @@ public class SocioDTO {
     private String email;
     private String telefono;
     private MetodoEnvio metodoEnvio;
-    private ArrayList<Prestamo> prestamos;
+    private List<Prestamo> prestamosSocio;
     private Boolean autenticarse;
     //TODO: Autenticarse que funcion cumple?
     private Boolean habilitado;
     private int prestamosPositivos;
     private int penalizadorDiasPrestamo = 0;
 
-    public SocioDTO(int idSocio, String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio, ArrayList<Prestamo> prestamos, Boolean autenticarse, Boolean habilitado, int prestamosPositivos, int penalizadorDiasPrestamo) {
+    public SocioDTO(int idSocio, String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio, List<Prestamo> prestamos, Boolean autenticarse, Boolean habilitado, int prestamosPositivos, int penalizadorDiasPrestamo) {
         this.idSocio = idSocio;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,7 +29,7 @@ public class SocioDTO {
         this.email = email;
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
-        this.prestamos = prestamos;       //Se crea sin prestamos
+        //this.prestamos = prestamos;       Se crea sin prestamos
         this.autenticarse = autenticarse;
         this.habilitado = habilitado;
         this.prestamosPositivos = prestamosPositivos;
@@ -91,12 +92,12 @@ public class SocioDTO {
         this.metodoEnvio = metodoEnvio;
     }
 
-    public ArrayList<Prestamo> getPrestamos() {
-        return prestamos;
+    public List<Prestamo> getPrestamos() {
+        return prestamosSocio;
     }
 
-    public void setPrestamos(ArrayList<Prestamo> prestamos) {
-        this.prestamos = prestamos;
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamosSocio = prestamos;
     }
 
     public Boolean getAutenticarse() {
