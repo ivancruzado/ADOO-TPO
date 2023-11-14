@@ -1,12 +1,11 @@
-package modelos;
+package modelos.dtos;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+
 import modelos.Notificador;
-import modelos.dtos.PrestamoDTO;
 
-public class Prestamo {
-    private static int contadorIdPrestamo = 1; // Autoincremental
-
+public class PrestamoDTO {
     private int idPrestamo;
     private int tiempoPrestamoBase;
     private Date fechaPrestamo;
@@ -15,27 +14,33 @@ public class Prestamo {
     private int idSocio;
     private int idEjemplar;
     private Notificador notificacion;
-    
-    public Prestamo(int tiempoPrestamoBase, Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
-        this.idPrestamo = contadorIdPrestamo++;
+
+    public PrestamoDTO(int idPrestamo, int tiempoPrestamoBase, Date fechaPrestamo, Date fechaDevolucion, String motivo,
+            int idSocio, int idEjemplar, Notificador notificacion) {
+        this.idPrestamo = idPrestamo;
         this.tiempoPrestamoBase = tiempoPrestamoBase;
         this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
         this.motivo = motivo;
         this.idSocio = idSocio;
         this.idEjemplar = idEjemplar;
-        //this.notificacion = new Notificador();
+        this.notificacion = notificacion;
     }
 
-    public PrestamoDTO toDTO() {
-        return new PrestamoDTO(this.idPrestamo, this.tiempoPrestamoBase, this.fechaPrestamo, this.fechaDevolucion, this.motivo, this.idSocio, this.idEjemplar, this.notificacion);
+    //TODO revisar que tenga sentido
+    public Boolean devolvioATiempo() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaPrestamo);
+        calendar.add(Calendar.DAY_OF_YEAR, this.tiempoPrestamoBase);
+        return this.fechaDevolucion.before(calendar.getTime());
     }
 
-    public int crearPrestamo(int tiempoPrestamoBase, Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
-        Prestamo prestamo = new Prestamo(tiempoPrestamoBase, fechaPrestamo, motivo, idSocio, idEjemplar);
-        return prestamo.idPrestamo;
+    public int diasRetraso() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaPrestamo);
+        calendar.add(Calendar.DAY_OF_YEAR, this.tiempoPrestamoBase);
+        return (int) ((this.fechaDevolucion.getTime() - calendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
     }
-
-    
 
     public int getIdPrestamo() {
         return idPrestamo;
@@ -102,6 +107,4 @@ public class Prestamo {
     }
 
     
-    
-
 }

@@ -33,6 +33,11 @@ public class ControllerEjemplar {
         return ejemplar.getIdEjemplar();
     }
 
+    public Boolean disponible(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        return ejemplar.disponible();
+    }
+
     public int tiempoPrestamo(int idEjemplar) {
         Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
         return ejemplar.getTiempoPrestamo();

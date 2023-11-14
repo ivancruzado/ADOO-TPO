@@ -25,12 +25,8 @@ public abstract class Ejemplar {
         this.prestado = false;
     }
 
-    public int getIdEjemplar() {
-        return idEjemplar;
-    }
-
-    public int getTiempoPrestamo(){
-        return this.tiempoPrestamo;
+    public Boolean disponible() {
+        return !this.prestado;
     }
 
     /**
@@ -79,6 +75,68 @@ public abstract class Ejemplar {
      */
     public void buscarEjemplar() {
         // TODO implement here
+    }
+
+
+
+    public static int getContadorIdEjemplar() {
+        return contadorIdEjemplar;
+    }
+
+
+
+    public static void setContadorIdEjemplar(int contadorIdEjemplar) {
+        Ejemplar.contadorIdEjemplar = contadorIdEjemplar;
+    }
+
+
+
+    public int getIdEjemplar() {
+        return idEjemplar;
+    }
+
+    public void setIdEjemplar(int idEjemplar) {
+        this.idEjemplar = idEjemplar;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public int getTiempoPrestamo() {
+        return tiempoPrestamo;
+    }
+
+    public void setTiempoPrestamo(int tiempoPrestamo) {
+        this.tiempoPrestamo = tiempoPrestamo;
+    }
+
+    public Boolean getPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(Boolean prestado) {
+        this.prestado = prestado;
     }
 
 }

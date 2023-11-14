@@ -1,22 +1,23 @@
 package chain.prestamo;
 
-import modelos.Prestamo;
+import java.util.ArrayList;
+
+import controladores.ControllerPrestamo;
+import modelos.dtos.PrestamoDTO;
 
 public class CalcularTiempoPrestamoBuenComportamiento extends CalcularDuracionPrestamo {
 
-    /**
-     * Default constructor
-     */
-    public CalcularTiempoPrestamoBuenComportamiento() {
-    }
-
-    /**
-     * @param prestamo 
-     * @return
-     */
-    public Prestamo calcularTiempo(Prestamo prestamo) {
-        // TODO implement here
-        return null;
+    public int calcularTiempoBase(int idSocio, int idEjemplar) {
+        int prestamosCorrectos = 0;
+        ControllerPrestamo controladorPrestamo = ControllerPrestamo.getInstancia();
+        ArrayList<PrestamoDTO> prestamosDTO = new ArrayList<>();
+        prestamosDTO = controladorPrestamo.getPrestamosSocio(idSocio);
+        for (PrestamoDTO prestamo : prestamosDTO) {
+            if (prestamo.devolvioATiempo()) {
+                prestamosCorrectos++;
+            }
+        }
+        return prestamosCorrectos/5;
     }
 
 }

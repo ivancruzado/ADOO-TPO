@@ -1,23 +1,12 @@
 package chain.prestamo;
 
-import modelos.Prestamo;
+import controladores.ControllerEjemplar;
 
 public class CalcularTiempoPrestamoEjemplar extends CalcularDuracionPrestamo {
 
-    /**
-     * Default constructor
-     */
-    public CalcularTiempoPrestamoEjemplar() {
+    public int calcularTiempoBase(int idSocio, int idEjemplar) {
+        ControllerEjemplar controladorEjemplar = ControllerEjemplar.getInstancia();
+        return controladorEjemplar.tiempoPrestamo(idEjemplar);
     }
-
-    /**
-     * @param prestamo 
-     * @return
-     */
-    public Prestamo calcularTiempo(Prestamo prestamo) {
-        // TODO implement here
-        return null;
-    }
-
 
 }

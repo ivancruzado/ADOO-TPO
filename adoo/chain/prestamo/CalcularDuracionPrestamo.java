@@ -1,23 +1,12 @@
 package chain.prestamo;
 
-
-import modelos.Prestamo;
-
-/**
- * 
- */
 public abstract class CalcularDuracionPrestamo {
+    protected CalcularDuracionPrestamo siguiente;
+    
+    public abstract int calcularTiempoBase(int idSocio, int idEjemplar);
 
-    /**
-     * Default constructor
-     */
-    public CalcularDuracionPrestamo() {
+    public void setSiguiente(CalcularDuracionPrestamo siguiente) {
+        this.siguiente = siguiente;
     }
-
-    /**
-     * @param prestamo 
-     * @return
-     */
-    public abstract Prestamo calcularTiempo(Prestamo prestamo);
 
 }
