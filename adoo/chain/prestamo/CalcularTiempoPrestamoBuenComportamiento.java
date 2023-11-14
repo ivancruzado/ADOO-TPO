@@ -7,6 +7,10 @@ import modelos.dtos.PrestamoDTO;
 
 public class CalcularTiempoPrestamoBuenComportamiento extends CalcularDuracionPrestamo {
 
+    public CalcularTiempoPrestamoBuenComportamiento(CalcularDuracionPrestamo siguiente) {
+        super(siguiente);
+    }
+
     public int calcularTiempoBase(int idSocio, int idEjemplar) {
         int prestamosCorrectos = 0;
         ControllerPrestamo controladorPrestamo = ControllerPrestamo.getInstancia();

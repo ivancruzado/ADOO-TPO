@@ -1,13 +1,11 @@
 package controladores;
 
-import java.sql.Array;
 import java.util.*;
 
 import chain.prestamo.CalcularDuracionPrestamo;
 import chain.prestamo.CalcularTiempoPrestamoBuenComportamiento;
 import chain.prestamo.CalcularTiempoPrestamoEjemplar;
 import chain.prestamo.CalcularTiempoPrestamoPenalizacion;
-import modelos.Ejemplar;
 import modelos.Prestamo;
 import modelos.dtos.PrestamoDTO;
 
@@ -20,14 +18,11 @@ public class ControllerPrestamo {
     private CalcularDuracionPrestamo duracionPrestamo;
 
     public ControllerPrestamo() {
-        CalcularTiempoPrestamoBuenComportamiento buenComportamiento = new CalcularTiempoPrestamoBuenComportamiento();
-        CalcularTiempoPrestamoEjemplar ejemplar = new CalcularTiempoPrestamoEjemplar();
-        CalcularTiempoPrestamoPenalizacion penalizacion = new CalcularTiempoPrestamoPenalizacion();
+        CalcularDuracionPrestamo buenComportamiento = new CalcularTiempoPrestamoBuenComportamiento(null);
+        CalcularDuracionPrestamo ejemplar = new CalcularTiempoPrestamoEjemplar(buenComportamiento);
+        CalcularDuracionPrestamo penalizacion = new CalcularTiempoPrestamoPenalizacion(ejemplar);
 
-        buenComportamiento.setSiguiente(ejemplar);
-        ejemplar.setSiguiente(penalizacion);
-
-        duracionPrestamo = buenComportamiento;
+        duracionPrestamo = penalizacion;
     }
 
     public static ControllerPrestamo getInstancia() {

@@ -35,8 +35,6 @@ public class Prestamo {
         return prestamo.idPrestamo;
     }
 
-    
-
     public int getIdPrestamo() {
         return idPrestamo;
     }
