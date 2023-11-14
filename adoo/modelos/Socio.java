@@ -50,4 +50,110 @@ public class Socio implements IAdapterAutenticador {
         return penalizadorDiasPrestamo;
     }
 
+    public static int getContadorIdSocio() {
+        return contadorIdSocio;
+    }
+
+    public static void setContadorIdSocio(int contadorIdSocio) {
+        Socio.contadorIdSocio = contadorIdSocio;
+    }
+
+    public int getIdSocio() {
+        return idSocio;
+    }
+
+    public void setIdSocio(int idSocio) {
+        this.idSocio = idSocio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public MetodoEnvio getMetodoEnvio() {
+        return metodoEnvio;
+    }
+
+    public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
+        this.metodoEnvio = metodoEnvio;
+    }
+
+    public List<Prestamo> getPrestamosSocio() {
+        return prestamosSocio;
+    }
+
+    public void setPrestamosSocio(List<Prestamo> prestamosSocio) {
+        this.prestamosSocio = prestamosSocio;
+    }
+
+    public Boolean getAutenticarse() {
+        return autenticarse;
+    }
+
+    public void setAutenticarse(Boolean autenticarse) {
+        this.autenticarse = autenticarse;
+    }
+
+    public Boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(Boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    public int getPrestamosPositivos() {
+        return prestamosPositivos;
+    }
+
+    public void setPrestamosPositivos(int prestamosPositivos) {
+        this.prestamosPositivos = prestamosPositivos;
+    }
+
+    public int getPenalizadorDiasPrestamo() {
+        return penalizadorDiasPrestamo;
+    }
+
+    public void setPenalizadorDiasPrestamo(int penalizadorDiasPrestamo) {
+        this.penalizadorDiasPrestamo = penalizadorDiasPrestamo;
+    }
+
+    
+
 }
