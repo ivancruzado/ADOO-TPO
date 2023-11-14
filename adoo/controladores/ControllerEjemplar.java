@@ -4,6 +4,7 @@ import java.util.*;
 
 import factory.ejemplar.FactoryEjemplar;
 import modelos.Ejemplar;
+import modelos.dtos.EjemplarDTO;
 
 public class ControllerEjemplar {
 
@@ -43,6 +44,11 @@ public class ControllerEjemplar {
         return ejemplar.getTiempoPrestamo();
     }
 
+    public String categoria(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        return ejemplar.getCategoria();
+    }
+
     private Ejemplar buscaEjemplar(int idEjemplar){
         for (Ejemplar ejemplar : this.productos) {
             if (ejemplar.getIdEjemplar() == idEjemplar)
@@ -60,11 +66,12 @@ public class ControllerEjemplar {
         return "";
     }
 
-    /**
-     * @return
-     */
-    public void buscarEjemplar() {
-        // TODO implement here
+    public ArrayList<EjemplarDTO> listadoEjemplares(){
+        ArrayList<EjemplarDTO> ejemplaresDTO = new ArrayList<EjemplarDTO>();
+        for (Ejemplar ejemplar : this.productos) {
+            ejemplaresDTO.add(ejemplar.toDTO());
+        }
+        return ejemplaresDTO;
     }
 
 }

@@ -1,21 +1,19 @@
 package modelos;
 
 import java.util.*;
+import modelos.dtos.EjemplarDTO;
 
-/**
- * 
- */
-public abstract class Busqueda extends Ejemplar {
+public abstract class Busqueda {
 
-    /**
-     * Default constructor
-     */
-    public Busqueda() {
+    protected ArrayList<EjemplarDTO> ejemplares;
+  
+    public Busqueda(ArrayList<EjemplarDTO> ejemplares) {
+        this.ejemplares = ejemplares;
     }
 
     /**
      * @return
      */
-    public abstract void buscarEjemplar();
+    public abstract ArrayList<EjemplarDTO> buscarEjemplar(Object criterio);
 
 }
