@@ -35,6 +35,7 @@ public class ControllerPrestamo {
         int tiempoPrestamoBase = duracionPrestamo.calcularTiempoBase(idSocio, idEjemplar);
         Prestamo prestamo = new Prestamo(tiempoPrestamoBase, fechaPrestamo, motivo, idSocio, idEjemplar);
         prestamos.add(prestamo);
+        //TODO Llamar Logger
         return prestamo.getIdPrestamo();
     }
 

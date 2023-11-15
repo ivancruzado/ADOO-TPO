@@ -68,6 +68,7 @@ public class App {
             System.out.println(ejemplarDTO.getTitulo());
         }
 
+        
 
     }
 }

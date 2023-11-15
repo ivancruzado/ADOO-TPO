@@ -12,5 +12,5 @@ public class CalcularTiempoPrestamoEjemplar extends CalcularDuracionPrestamo {
         ControllerEjemplar controladorEjemplar = ControllerEjemplar.getInstancia();
         return controladorEjemplar.tiempoPrestamo(idEjemplar);
     }
-
+    //TODO AGREGAR DEFUALT A TODOS VALIDACION NULL
 }
