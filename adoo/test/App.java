@@ -112,12 +112,14 @@ public class App {
 
         controladorSocio.estadoSocio(socio);
 
-        // int prestamo = controladorSocio.solicitarPrestamo(new Date(), "Tengo un motivo", socio, ejemplares.get(0));
+         int prestamo = controladorSocio.solicitarPrestamo(new Date(), "Tengo un motivo", socio, ejemplares.get(0));
 
         // System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
         
         System.out.println(controladorEjemplar.localizarEjemplar(ejemplares.get(0)));
 
+        //Quién tiene el ejemplar
+        System.out.println(controladorSocio.nombre(controladorPrestamo.socio(controladorPrestamo.encontrarEjemplar(ejemplares.get(0)))));
 
         //System.out.println("Fecha revista: " + controladorEjemplar.fecha(revista));        
 

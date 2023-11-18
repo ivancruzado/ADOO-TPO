@@ -44,6 +44,22 @@ public class ControllerPrestamo {
         return prestamo.getIdPrestamo();
     }
 
+    public int encontrarEjemplar(int idEjemplar) {
+        for (Prestamo prestamo : this.prestamos) {
+            if (prestamo.getIdEjemplar() == idEjemplar)
+                return prestamo.getIdPrestamo();
+        }
+        return -1;
+    }
+
+    public int socioPrestamo(int idPrestamo){
+        for (Prestamo prestamo : this.prestamos) {
+            if (prestamo.getIdPrestamo() == idPrestamo)
+                return prestamo.getIdSocio();
+        }
+        return -1;
+    }
+
     public ArrayList <PrestamoDTO> getPrestamosSocio(int idSocio) {
         ArrayList<PrestamoDTO> prestamosDTO = new ArrayList<PrestamoDTO>();
         for (Prestamo prestamo : this.prestamos) {
