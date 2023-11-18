@@ -1,13 +1,15 @@
 package interfaz;
 
+import java.util.List;
+
 /**
  * 
  */
-public interface IModificacionDatos {
+public interface ILogger {
 
     /**
      * @return
      */
-    public void loguearCambios();
-
+    public void loguearCambios(String field, String data);
+    public List<String> getCambios();
 }

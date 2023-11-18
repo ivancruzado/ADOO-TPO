@@ -1,7 +1,7 @@
 package modelos;
 
 import java.util.*;
-import modelos.Notificador;
+
 import modelos.dtos.PrestamoDTO;
 
 public class Prestamo {
@@ -15,6 +15,7 @@ public class Prestamo {
     private int idSocio;
     private int idEjemplar;
     private Notificador notificacion;
+    private interfaz.IStatePrestamo estadoPrestamo;
     
     public Prestamo(int tiempoPrestamoBase, Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
         this.idPrestamo = contadorIdPrestamo++;
