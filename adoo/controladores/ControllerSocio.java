@@ -84,4 +84,8 @@ public class ControllerSocio {
             }
         }
     }
+    
+    public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
+        return ControllerPrestamo.getInstancia().solicitarPrestamo(fechaPrestamo, motivo, idSocio, idEjemplar);    
+    }
 }
