@@ -63,8 +63,7 @@ public class ControllerEjemplar {
      * @return
      */
     public String localizarEjemplar(int idEjemplar) {
-        // TODO implement here
-        return "";
+        return this.buscaEjemplar(idEjemplar).localizar(idEjemplar);
     }
 
     public ArrayList<EjemplarDTO> listadoEjemplares(){
@@ -98,6 +97,4 @@ public class ControllerEjemplar {
             return "Ejemplar no encontrado";
         return ejemplar.getAutor();
     }
-
-
 }

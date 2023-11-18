@@ -116,7 +116,7 @@ public class App {
 
         System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
         
-
+        System.out.println(controladorEjemplar.localizarEjemplar(ejemplares.get(0)));
 
 
         //System.out.println("Fecha revista: " + controladorEjemplar.fecha(revista));        

@@ -2,6 +2,8 @@ package modelos;
 
 import java.util.*;
 
+import adapter.localizador.AdapterLocalizador;
+import adapter.localizador.ILocalizarEjemplar;
 import modelos.dtos.EjemplarDTO;
 
 /**
@@ -11,22 +13,21 @@ public abstract class Ejemplar {
 
     private static int contadorIdEjemplar = 1; // Autoincremental
     
-    private int idEjemplar;
+    private int idEjemplar = contadorIdEjemplar++;
     private String titulo;
     private String autor;
     private Date fechaPublicacion;
     private int tiempoPrestamo;
-    private Boolean prestado;
+    private Boolean prestado = false;
     private String categoria;
+    private ILocalizarEjemplar localizador = new AdapterLocalizador();
 
     public Ejemplar(String titulo, String autor, Date fechaPublicacion, int tiempoPrestamo, String categoria) {
-        this.idEjemplar = contadorIdEjemplar++;
         this.titulo = titulo;
         this.autor = autor;
         this.fechaPublicacion = fechaPublicacion;
         this.tiempoPrestamo = tiempoPrestamo;
         this.categoria = categoria;
-        this.prestado = false;
     }
 
     public EjemplarDTO toDTO(){
@@ -149,6 +150,10 @@ public abstract class Ejemplar {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public String localizar(int idEjemplar){
+        return this.localizador.localizarEjemplar(idEjemplar);
     }
 
 }
