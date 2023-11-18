@@ -1,5 +1,6 @@
 package controladores;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import factory.ejemplar.FactoryEjemplar;
@@ -73,5 +74,30 @@ public class ControllerEjemplar {
         }
         return ejemplaresDTO;
     }
+
+    public String fecha(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        if (ejemplar == null)
+            return "Ejemplar no encontrado";
+
+        // Formatear la fecha en el formato DD/MM/YYYY
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        return formatoFecha.format(ejemplar.getFechaPublicacion());
+    }
+    
+    public String titulo(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        if (ejemplar == null)
+            return "Ejemplar no encontrado";
+        return ejemplar.getTitulo();
+    }
+
+    public String autor(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        if (ejemplar == null)
+            return "Ejemplar no encontrado";
+        return ejemplar.getAutor();
+    }
+
 
 }

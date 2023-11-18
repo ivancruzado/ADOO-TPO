@@ -19,11 +19,17 @@ public class BusquedaCategoria extends Busqueda {
         if (criterio instanceof String) {
             String categoria = (String) criterio;
             ArrayList<EjemplarDTO> ejemplaresEncontrados = new ArrayList<EjemplarDTO>();
-            for (EjemplarDTO ejemplar : this.ejemplares) {
-                if (ejemplar.getCategoria().equals(categoria)) {
-                    ejemplaresEncontrados.add(ejemplar);
-                }
+            if (criterio.equals("Revista")){
+                for (EjemplarDTO ejemplar : this.ejemplares)
+                    if (ejemplar.getCategoria().equals(categoria))
+                        ejemplaresEncontrados.add(ejemplar);
             }
+            else{
+                for (EjemplarDTO ejemplar : this.ejemplares)
+                    if (ejemplar.getCategoria().contains(categoria))
+                        ejemplaresEncontrados.add(ejemplar);
+            }                
+            
             return ejemplaresEncontrados;
         }else{
             return null;

@@ -8,7 +8,7 @@ import chain.prestamo.CalcularTiempoPrestamoEjemplar;
 import chain.prestamo.CalcularTiempoPrestamoPenalizacion;
 import modelos.Prestamo;
 import modelos.dtos.PrestamoDTO;
-
+import controladores.ControllerSocio;
 
 public class ControllerPrestamo {
 
@@ -23,6 +23,7 @@ public class ControllerPrestamo {
         CalcularDuracionPrestamo penalizacion = new CalcularTiempoPrestamoPenalizacion(ejemplar);
 
         duracionPrestamo = penalizacion;
+        prestamos = new ArrayList<Prestamo>();
     }
 
     public static ControllerPrestamo getInstancia() {
@@ -32,6 +33,10 @@ public class ControllerPrestamo {
     }
 
     public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
+        if (!ControllerSocio.getInstancia().habilitado(idSocio)){
+            System.out.println("El socio no esta habilitado para solicitar prestamos");
+            return -1;
+        }
         int tiempoPrestamoBase = duracionPrestamo.calcularTiempoBase(idSocio, idEjemplar);
         Prestamo prestamo = new Prestamo(tiempoPrestamoBase, fechaPrestamo, motivo, idSocio, idEjemplar);
         prestamos.add(prestamo);
@@ -46,6 +51,21 @@ public class ControllerPrestamo {
                 prestamosDTO.add(prestamo.toDTO());
         }
         return prestamosDTO;
+    }
+
+    public int socio(int idPrestamo) {
+        Prestamo prestamo = buscaPrestamo(idPrestamo);
+        if (prestamo == null)
+            return -1;
+        return prestamo.getIdSocio();
+    }
+
+    private Prestamo buscaPrestamo(int idPrestamo){
+        for (Prestamo prestamo : this.prestamos) {
+            if (prestamo.getIdPrestamo() == idPrestamo)
+                return prestamo;
+        }
+        return null;
     }
 
     public void cancelarPrestamo(int idPrestamo) {

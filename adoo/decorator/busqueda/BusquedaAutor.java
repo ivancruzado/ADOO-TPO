@@ -21,7 +21,7 @@ public class BusquedaAutor extends Busqueda {
             String autor = (String) criterio;
             ArrayList<EjemplarDTO> ejemplaresEncontrados = new ArrayList<EjemplarDTO>();
             for (EjemplarDTO ejemplar : this.ejemplares) {
-                if (ejemplar.getAutor().equals(autor)) {
+                if (ejemplar.getAutor().contains(autor)) {
                     ejemplaresEncontrados.add(ejemplar);
                 }
             }

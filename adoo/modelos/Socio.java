@@ -18,12 +18,12 @@ public class Socio implements IAdapterAutenticador {
     private String telefono;
     private MetodoEnvio metodoEnvio;
     private List<Prestamo> prestamosSocio;
-    private Boolean autenticarse;
-    private Boolean habilitado;
-    private int prestamosPositivos;
+    private Boolean autenticarse = false;
+    private Boolean habilitado = true;
+    private int prestamosPositivos = 0;
     private int penalizadorDiasPrestamo = 0;
 
-    public Socio(String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio, Boolean autenticarse, Boolean habilitado, int prestamosPositivos, int penalizadorDiasPrestamo) {
+    public Socio(String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio) {
         this.idSocio = contadorIdSocio++;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -32,10 +32,6 @@ public class Socio implements IAdapterAutenticador {
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
         //this.prestamos = prestamos;       //Se crea sin prestamos
-        this.autenticarse = autenticarse;
-        this.habilitado = habilitado;
-        this.prestamosPositivos = prestamosPositivos;
-        this.penalizadorDiasPrestamo = penalizadorDiasPrestamo;
     }
 
     public SocioDTO toDTO() {

@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.*;
 
+import color.ConsoleColors;
 import enums.MetodoEnvio;
 import modelos.Ejemplar;
 import modelos.Socio;
@@ -17,19 +18,17 @@ public class ControllerSocio {
         socios = new ArrayList<>();
     }
 
-
-
-    public static synchronized ControllerSocio getInstance() {
+    public static ControllerSocio getInstancia() {
         if (instancia == null) {
             instancia = new ControllerSocio();             //1 sola instancia
         }
         return instancia;
     }
 
-    public Socio crearSocio(String nombre, String apellido, String dni, String mail, String telefono, MetodoEnvio metodoEnvio, Boolean autenticarse, Boolean habilitado, int prestamosPositivos, int penalizadorDiasPrestamo) {
-        Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio,autenticarse,habilitado,prestamosPositivos,penalizadorDiasPrestamo);
-        socios.add(socioNuevo);
-        return socioNuevo;
+    public int crearSocio(String nombre, String apellido, String dni, String mail, String telefono, MetodoEnvio metodoEnvio) {
+        Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio);
+        this.socios.add(socioNuevo);
+        return socioNuevo.getIdSocio();
     }
 
     public void deshabilitarUsuario(int idSocio) {
@@ -40,6 +39,19 @@ public class ControllerSocio {
     public void habilitarUsuario(int idSocio) {
         Socio socio = buscaSocio(idSocio);
         socio.setHabilitado(true);
+    }
+
+    public void estadoSocio(int idSocio){
+        Socio socio = buscaSocio(idSocio);
+        if (socio.getHabilitado())
+            System.out.println("El socio está " + ConsoleColors.GREEN_BOLD + "HABILITADO" + ConsoleColors.RESET);
+        else
+            System.out.println("El socio está " + ConsoleColors.RED_BOLD + "DESHABILITADO" + ConsoleColors.RESET);
+    }
+
+    public Boolean habilitado(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        return socio.getHabilitado();
     }
 
     private Socio buscaSocio(int idSocio){
@@ -56,6 +68,13 @@ public class ControllerSocio {
 
     public void solicitarPrestamo(int idSocio, int idEjemplar) {
         
+    }
+
+    public String nombre(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getNombre();
     }
 
     public void aumentarPrestamoPositivo(int idSocio) {
