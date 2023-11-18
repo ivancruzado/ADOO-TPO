@@ -22,8 +22,9 @@ public class Socio implements IAdapterAutenticador {
     private Boolean habilitado = true;
     private int prestamosPositivos = 0;
     private int penalizadorDiasPrestamo = 0;
+    private interfaz.ILogger logger;
 
-    public Socio(String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio) {
+    public Socio(String nombre, String apellido, String dni, String email, String telefono, MetodoEnvio metodoEnvio, interfaz.ILogger logger) {
         this.idSocio = contadorIdSocio++;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,6 +32,7 @@ public class Socio implements IAdapterAutenticador {
         this.email = email;
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
+        this.logger = logger;
         //this.prestamos = prestamos;       //Se crea sin prestamos
     }
 
@@ -60,6 +62,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setIdSocio(int idSocio) {
         this.idSocio = idSocio;
+        logger.loguearCambios("idSocio", Integer.toString(idSocio));
     }
 
     public String getNombre() {
@@ -68,6 +71,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+        logger.loguearCambios("nombre", nombre);
     }
 
     public String getApellido() {
@@ -76,6 +80,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+        logger.loguearCambios("apellido", apellido);
     }
 
     public String getDni() {
@@ -84,6 +89,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setDni(String dni) {
         this.dni = dni;
+        logger.loguearCambios("dni", dni);
     }
 
     public String getEmail() {
@@ -92,6 +98,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setEmail(String email) {
         this.email = email;
+        logger.loguearCambios("email", email);
     }
 
     public String getTelefono() {
@@ -100,6 +107,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+        logger.loguearCambios("telefono", telefono);
     }
 
     public MetodoEnvio getMetodoEnvio() {
@@ -108,6 +116,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setMetodoEnvio(MetodoEnvio metodoEnvio) {
         this.metodoEnvio = metodoEnvio;
+        logger.loguearCambios("metodoEnvio", String.valueOf(metodoEnvio));
     }
 
     public List<Prestamo> getPrestamosSocio() {
@@ -116,6 +125,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setPrestamosSocio(List<Prestamo> prestamosSocio) {
         this.prestamosSocio = prestamosSocio;
+        logger.loguearCambios("prestamosSocio", prestamosSocio.toString());
     }
 
     public Boolean getAutenticarse() {
@@ -124,6 +134,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setAutenticarse(Boolean autenticarse) {
         this.autenticarse = autenticarse;
+        logger.loguearCambios("autenticarse", autenticarse.toString());
     }
 
     public Boolean getHabilitado() {
@@ -132,6 +143,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setHabilitado(Boolean habilitado) {
         this.habilitado = habilitado;
+        logger.loguearCambios("habilitado", habilitado.toString());
     }
 
     public int getPrestamosPositivos() {
@@ -140,6 +152,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setPrestamosPositivos(int prestamosPositivos) {
         this.prestamosPositivos = prestamosPositivos;
+        logger.loguearCambios("prestamosPositivos", Integer.toString(prestamosPositivos));
     }
 
     public int getPenalizadorDiasPrestamo() {
@@ -148,6 +161,7 @@ public class Socio implements IAdapterAutenticador {
 
     public void setPenalizadorDiasPrestamo(int penalizadorDiasPrestamo) {
         this.penalizadorDiasPrestamo = penalizadorDiasPrestamo;
+        logger.loguearCambios("penalizadorDiasPrestamo", Integer.toString(penalizadorDiasPrestamo));
     }
 
     

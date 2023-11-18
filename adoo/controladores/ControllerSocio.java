@@ -25,8 +25,8 @@ public class ControllerSocio {
         return instancia;
     }
 
-    public int crearSocio(String nombre, String apellido, String dni, String mail, String telefono, MetodoEnvio metodoEnvio) {
-        Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio);
+    public int crearSocio(String nombre, String apellido, String dni, String mail, String telefono, MetodoEnvio metodoEnvio, interfaz.ILogger logger) {
+        Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio, logger);
         this.socios.add(socioNuevo);
         return socioNuevo.getIdSocio();
     }
