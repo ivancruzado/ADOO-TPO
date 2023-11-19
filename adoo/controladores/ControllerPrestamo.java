@@ -76,7 +76,7 @@ public class ControllerPrestamo {
         return prestamo.getIdSocio();
     }
 
-    public Prestamo buscaPrestamo(int idPrestamo){
+    private Prestamo buscaPrestamo(int idPrestamo){
         for (Prestamo prestamo : this.prestamos) {
             if (prestamo.getIdPrestamo() == idPrestamo)
                 return prestamo;

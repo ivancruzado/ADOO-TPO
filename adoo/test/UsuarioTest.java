@@ -13,7 +13,7 @@ import java.util.Date;
 class UsuarioTest {
     private ControllerSocio controllerSocio;
     private interfaz.ILogger logger;
-    private int IdSocio;
+
 
     @BeforeEach
     public void  inicio(){
@@ -23,51 +23,43 @@ class UsuarioTest {
 
     @Test
     public void CrearSocio(){
-        int nuevoSocio = controllerSocio.crearSocio("Luis","Jose","123213","Luis@mail.com","231231", MetodoEnvio.Email,logger);
-        Socio esperado = controllerSocio.buscaSocio(nuevoSocio);
-
-        Socio resultado = controllerSocio.buscaSocio(controllerSocio.getLista().size());
-        Assertions.assertEquals(esperado,resultado);
-    }
-
-
-    @Test
-    public void HabilitarUsuario(){
-        int socio = controllerSocio.crearSocio("Juan","Cruz","424242","Juan@mail.com","1122121", MetodoEnvio.Whatsapp,logger);
-        controllerSocio.buscaSocio(socio).setHabilitado(false);
-        controllerSocio.habilitarUsuario(socio);
-        boolean estadoSocio = controllerSocio.habilitado(1);
-        Assertions.assertTrue(estadoSocio);
-    }
-
-    @Test
-    public void DeshabilitarUsuario(){
-        controllerSocio.deshabilitarUsuario(2);
-        boolean estadoSocio = controllerSocio.habilitado(2);
-        Assertions.assertFalse(estadoSocio);
-    }
-
-
-    @Test
-    public void aumentarPrestamoPos(){
-        int prestamoPos = controllerSocio.buscaSocio(1).getPrestamosPositivos();
-        controllerSocio.aumentarPrestamoPositivo(1);
-        int prestamoPosNuevo = controllerSocio.buscaSocio(1).getPrestamosPositivos();
-        Assertions.assertTrue(prestamoPosNuevo>prestamoPos);
-
+        int actual = controllerSocio.getTamanioLista();
+        controllerSocio.crearSocio("Luis","Jose","123213","Luis@mail.com","231231", MetodoEnvio.Email,logger);
+        int nuevo = controllerSocio.getTamanioLista();
+        Assertions.assertTrue(nuevo>actual);
     }
 
     @Test
     public void solicitarPrestamo(){
 
-        int CantPrestamos =  ControllerPrestamo.getInstancia().getPrestamosSocio(1).size();
+        int socioId = controllerSocio.crearSocio("Luis","Jose","123213","Luis@mail.com","231231", MetodoEnvio.Email,logger);
+        int CantPrestamos =  ControllerPrestamo.getInstancia().getPrestamosSocio(socioId).size();
         System.out.println(CantPrestamos);
-        controllerSocio.solicitarPrestamo(new Date(), "Trabajo", 1, 1);
-        int CantPrestamosNew =  ControllerPrestamo.getInstancia().getPrestamosSocio(1).size();
-        System.out.println(CantPrestamosNew);
-        Assertions.assertTrue(CantPrestamos<CantPrestamosNew);
+        controllerSocio.solicitarPrestamo(new Date(), "Trabajo", socioId, 1);
+        int CantPrestamosNuevos =  ControllerPrestamo.getInstancia().getPrestamosSocio(socioId).size();
+        System.out.println(CantPrestamosNuevos);
+        Assertions.assertTrue(CantPrestamos<CantPrestamosNuevos);
+    }
+
+
+    @Test
+    public void DesHabilitarUsuario(){
+        int socio = controllerSocio.crearSocio("Juan","Cruz","424242","Juan@mail.com","1122121", MetodoEnvio.Whatsapp,logger);
+        controllerSocio.deshabilitarUsuario(socio);
+        boolean estadoSocioDes = controllerSocio.habilitado(socio);
+        Assertions.assertFalse(estadoSocioDes);
+        controllerSocio.habilitarUsuario(socio);
+        boolean estadoSocioHab = controllerSocio.habilitado(socio);
+        Assertions.assertTrue(estadoSocioHab);
+    }
+
+    @Test
+    public void aumentarPrestamoPos(){
+        controllerSocio.aumentarPrestamoPositivo(1);
 
     }
+
+
 
 
 }

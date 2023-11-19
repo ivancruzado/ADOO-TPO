@@ -47,8 +47,8 @@ public class ControllerSocio {
 
 
 
-    public List<Socio> getLista(){
-        return socios;
+    public int getTamanioLista(){
+        return socios.size();
     }
 
     public void estadoSocio(int idSocio){
@@ -64,7 +64,7 @@ public class ControllerSocio {
         return socio.getHabilitado();
     }
 
-    public Socio buscaSocio(int idSocio){
+    private Socio buscaSocio(int idSocio){
         for (Socio socio : socios) {
             if (socio.getIdSocio() == idSocio)
                 return socio;
