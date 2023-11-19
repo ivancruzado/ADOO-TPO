@@ -44,6 +44,13 @@ public class ControllerPrestamo {
         return prestamo.getIdPrestamo();
     }
 
+    public void modificarTiempoPrestamo(Prestamo prestamo,int tiempo){
+        Prestamo prestamoEncontrado = buscaPrestamo(prestamo.getIdPrestamo());
+        if(prestamoEncontrado != null){
+            prestamoEncontrado.setTiempoPrestamoBase(tiempo);
+        }
+    }
+
     public int encontrarEjemplar(int idEjemplar) {
         for (Prestamo prestamo : this.prestamos) {
             if (prestamo.getIdEjemplar() == idEjemplar)
@@ -68,6 +75,7 @@ public class ControllerPrestamo {
         }
         return prestamosDTO;
     }
+
 
     public int socio(int idPrestamo) {
         Prestamo prestamo = buscaPrestamo(idPrestamo);
