@@ -114,7 +114,7 @@ public class App {
 
          int prestamo = controladorSocio.solicitarPrestamo(new Date(), "Tengo un motivo", socio, ejemplares.get(0));
 
-        // System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
+        System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
         
         System.out.println(controladorEjemplar.localizarEjemplar(ejemplares.get(0)));
 

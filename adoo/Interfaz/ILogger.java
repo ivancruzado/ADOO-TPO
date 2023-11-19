@@ -6,7 +6,6 @@ import java.util.List;
  * 
  */
 public interface ILogger {
-
     /**
      * @return
      */

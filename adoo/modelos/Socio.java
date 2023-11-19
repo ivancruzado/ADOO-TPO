@@ -125,9 +125,10 @@ public class Socio implements IAdapterAutenticador {
         return prestamosSocio;
     }
 
-    public void setPrestamosSocio(List<Prestamo> prestamosSocio) {
-        this.prestamosSocio = prestamosSocio;
-        logger.loguearCambios("prestamosSocio", prestamosSocio.toString());
+
+    public void addPrestamosSocio(Prestamo prestamo) {
+        if (prestamosSocio == null) prestamosSocio = new ArrayList<>();
+        this.prestamosSocio.add(prestamo);
     }
 
     public void addPrestamo(Prestamo prestamo){

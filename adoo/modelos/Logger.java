@@ -26,7 +26,6 @@ public class Logger implements interfaz.ILogger {
         // TODO implement here
         String cambio = field + ";" + data + ";" + new Date();
         cambios.add(cambio);
-        System.out.println(cambio);
     }
 
 
