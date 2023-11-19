@@ -5,14 +5,16 @@ import java.util.*;
 import color.ConsoleColors;
 import enums.MetodoEnvio;
 import modelos.Ejemplar;
+import modelos.Logger;
 import modelos.Socio;
 import modelos.dtos.SocioDTO;
 
 
 public class ControllerSocio {
 
+
     private static ControllerSocio instancia;
-    private List<Socio> socios;
+    private static List<Socio> socios;
 
     private ControllerSocio() {
         socios = new ArrayList<>();
@@ -20,14 +22,16 @@ public class ControllerSocio {
 
     public static ControllerSocio getInstancia() {
         if (instancia == null) {
-            instancia = new ControllerSocio();             //1 sola instancia
+            instancia = new ControllerSocio();//1 sola instancia
         }
         return instancia;
     }
 
+
+
     public int crearSocio(String nombre, String apellido, String dni, String mail, String telefono, MetodoEnvio metodoEnvio, interfaz.ILogger logger) {
         Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio, logger);
-        this.socios.add(socioNuevo);
+        socios.add(socioNuevo);
         return socioNuevo.getIdSocio();
     }
 
@@ -39,6 +43,12 @@ public class ControllerSocio {
     public void habilitarUsuario(int idSocio) {
         Socio socio = buscaSocio(idSocio);
         socio.setHabilitado(true);
+    }
+
+
+
+    public List<Socio> getLista(){
+        return socios;
     }
 
     public void estadoSocio(int idSocio){
@@ -54,8 +64,8 @@ public class ControllerSocio {
         return socio.getHabilitado();
     }
 
-    private Socio buscaSocio(int idSocio){
-        for (Socio socio : this.socios) {
+    public Socio buscaSocio(int idSocio){
+        for (Socio socio : socios) {
             if (socio.getIdSocio() == idSocio)
                 return socio;
         }
@@ -66,9 +76,6 @@ public class ControllerSocio {
         // TODO implement here
     }
 
-    public void solicitarPrestamo(int idSocio, int idEjemplar) {
-        
-    }
 
     public String nombre(int idSocio) {
         Socio socio = buscaSocio(idSocio);
@@ -79,13 +86,15 @@ public class ControllerSocio {
 
     public void aumentarPrestamoPositivo(int idSocio) {
         for (Socio socio : socios) {
-            if (socio.toDTO().getIdSocio() == idSocio) {
-                socio.toDTO().setPrestamosPositivos(socio.toDTO().getPrestamosPositivos()+1);
+            if (socio.getIdSocio() == idSocio) {
+                socio.setPrestamosPositivos(socio.getPrestamosPositivos()+1);
             }
         }
     }
+
+
     
     public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
-        return ControllerPrestamo.getInstancia().solicitarPrestamo(fechaPrestamo, motivo, idSocio, idEjemplar);    
+        return ControllerPrestamo.getInstancia().solicitarPrestamo(fechaPrestamo, motivo, idSocio, idEjemplar);
     }
 }
