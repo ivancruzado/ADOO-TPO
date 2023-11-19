@@ -33,7 +33,7 @@ public class Socio implements IAdapterAutenticador {
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
         this.logger = logger;
-        //this.prestamos = prestamos;       //Se crea sin prestamos
+        //this.prestamosSocio = prestamos;       //Se crea sin prestamos
     }
 
     public SocioDTO toDTO() {
@@ -123,9 +123,10 @@ public class Socio implements IAdapterAutenticador {
         return prestamosSocio;
     }
 
-    public void setPrestamosSocio(List<Prestamo> prestamosSocio) {
-        this.prestamosSocio = prestamosSocio;
-        logger.loguearCambios("prestamosSocio", prestamosSocio.toString());
+
+    public void addPrestamosSocio(Prestamo prestamo) {
+        if (prestamosSocio == null) prestamosSocio = new ArrayList<>();
+        this.prestamosSocio.add(prestamo);
     }
 
     public Boolean getAutenticarse() {

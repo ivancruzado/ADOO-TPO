@@ -5,7 +5,9 @@ import java.util.*;
 import color.ConsoleColors;
 import enums.MetodoEnvio;
 import modelos.Ejemplar;
+import modelos.Prestamo;
 import modelos.Socio;
+import modelos.dtos.PrestamoDTO;
 import modelos.dtos.SocioDTO;
 
 
@@ -29,6 +31,30 @@ public class ControllerSocio {
         Socio socioNuevo = new Socio(nombre,apellido,dni,mail,telefono, metodoEnvio, logger);
         this.socios.add(socioNuevo);
         return socioNuevo.getIdSocio();
+    }
+
+    public List<String> getHistorialPrestamos(int idSocio) {
+        return getHistorialPrestamos(idSocio);
+    }
+
+    public void addPrestamo(int idSocio, Prestamo prestamo) {
+        Socio socio = buscaSocio(idSocio);
+        socio.addPrestamosSocio(prestamo);
+    }
+
+    public void modificarMailSocio(int idSocio, String nombre) {
+        Socio socio = buscaSocio(idSocio);
+        socio.setNombre(nombre);
+    }
+
+    public void modificarTelefonoSocio(int idSocio, String telefono) {
+        Socio socio = buscaSocio(idSocio);
+        socio.setTelefono(telefono);
+    }
+
+    public void modificarMetodoEnvioSocio(int idSocio, MetodoEnvio metodoEnvio) {
+        Socio socio = buscaSocio(idSocio);
+        socio.setMetodoEnvio(metodoEnvio);
     }
 
     public void deshabilitarUsuario(int idSocio) {

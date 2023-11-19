@@ -29,7 +29,7 @@ public class SocioDTO {
         this.email = email;
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
-        //this.prestamos = prestamos;       Se crea sin prestamos
+        //this.prestamosSocio = prestamos;       Se crea sin prestamos
         this.autenticarse = autenticarse;
         this.habilitado = habilitado;
         this.prestamosPositivos = prestamosPositivos;
