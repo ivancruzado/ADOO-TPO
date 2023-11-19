@@ -19,7 +19,7 @@ public class Socio implements IAdapterAutenticador {
     private MetodoEnvio metodoEnvio;
     private List<Prestamo> prestamosSocio;
     private Boolean autenticarse = false;
-    private Boolean habilitado = true;
+    private Boolean habilitado;
     private int prestamosPositivos = 0;
     private int penalizadorDiasPrestamo = 0;
     private interfaz.ILogger logger;
@@ -33,7 +33,9 @@ public class Socio implements IAdapterAutenticador {
         this.telefono = telefono;
         this.metodoEnvio = metodoEnvio;
         this.logger = logger;
-        //this.prestamosSocio = prestamos;       //Se crea sin prestamos
+        this.habilitado = true;
+        prestamosSocio = new ArrayList<>();
+        //this.prestamos = prestamos;       //Se crea sin prestamos
     }
 
     public SocioDTO toDTO() {
@@ -127,6 +129,10 @@ public class Socio implements IAdapterAutenticador {
     public void addPrestamosSocio(Prestamo prestamo) {
         if (prestamosSocio == null) prestamosSocio = new ArrayList<>();
         this.prestamosSocio.add(prestamo);
+    }
+
+    public void addPrestamo(Prestamo prestamo){
+        prestamosSocio.add((prestamo));
     }
 
     public Boolean getAutenticarse() {
