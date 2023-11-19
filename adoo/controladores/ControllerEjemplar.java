@@ -35,14 +35,30 @@ public class ControllerEjemplar {
         return ejemplar.getIdEjemplar();
     }
 
-    public Boolean disponible(int idEjemplar) {
+    public Boolean estadoEjemplar(int idEjemplar) {
         Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
-        return ejemplar.disponible();
+        if (ejemplar != null){
+            return ejemplar.getPrestado();
+        }
+        return null;
+    }
+
+    public void cambiarEstado(int idEjemplar) {
+        Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
+        if(estadoEjemplar(idEjemplar)){
+            ejemplar.setPrestado(false);
+        } else if (!estadoEjemplar(idEjemplar)) {
+            ejemplar.setPrestado(true);
+        }
     }
 
     public int tiempoPrestamo(int idEjemplar) {
         Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
         return ejemplar.getTiempoPrestamo();
+    }
+
+    public int getTamanioListaEjemplar(){
+        return productos.size();
     }
 
     public String categoria(int idEjemplar) {

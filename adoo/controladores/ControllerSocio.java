@@ -118,6 +118,15 @@ public class ControllerSocio {
         }
     }
 
+    public int GetPrestamoPositivo(int idSocio) {
+        for (Socio socio : socios) {
+            if (socio.getIdSocio() == idSocio) {
+                return buscaSocio(idSocio).getPrestamosPositivos();
+            }
+        }
+        return -1;
+    }
+
 
     
     public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {

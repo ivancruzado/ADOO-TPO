@@ -5,6 +5,7 @@ import controladores.ControllerSocio;
 import enums.MetodoEnvio;
 import modelos.Logger;
 import modelos.Socio;
+import modelos.dtos.SocioDTO;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.Date;
 class UsuarioTest {
     private ControllerSocio controllerSocio;
     private interfaz.ILogger logger;
-
 
     @BeforeEach
     public void  inicio(){
@@ -34,10 +34,10 @@ class UsuarioTest {
 
         int socioId = controllerSocio.crearSocio("Luis","Jose","123213","Luis@mail.com","231231", MetodoEnvio.Email,logger);
         int CantPrestamos =  ControllerPrestamo.getInstancia().getPrestamosSocio(socioId).size();
-        System.out.println(CantPrestamos);
+        //System.out.println(CantPrestamos);
         controllerSocio.solicitarPrestamo(new Date(), "Trabajo", socioId, 1);
         int CantPrestamosNuevos =  ControllerPrestamo.getInstancia().getPrestamosSocio(socioId).size();
-        System.out.println(CantPrestamosNuevos);
+        //System.out.println(CantPrestamosNuevos);
         Assertions.assertTrue(CantPrestamos<CantPrestamosNuevos);
     }
 
@@ -55,11 +55,10 @@ class UsuarioTest {
 
     @Test
     public void aumentarPrestamoPos(){
+        int prestamoPositivo = controllerSocio.GetPrestamoPositivo(1);
         controllerSocio.aumentarPrestamoPositivo(1);
-
+        int prestamoPositivo2 = controllerSocio.GetPrestamoPositivo(1);
+        Assertions.assertTrue(prestamoPositivo<prestamoPositivo2);
     }
-
-
-
 
 }
