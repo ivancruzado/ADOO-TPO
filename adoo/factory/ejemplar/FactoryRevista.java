@@ -11,4 +11,8 @@ public class FactoryRevista implements FactoryEjemplar {
         return new Revista(titulo, autor, fechaPublicacion, this.tiempoPrestamo);
     }
 
+    public String setTiempoPrestamo(int tiempoPrestamo) {
+        this.tiempoPrestamo = tiempoPrestamo;
+        return "Revista";
+    }
 }

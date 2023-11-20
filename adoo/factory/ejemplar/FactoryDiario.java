@@ -10,4 +10,8 @@ public class FactoryDiario implements FactoryEjemplar {
         return new Diario(titulo, autor, fechaPublicacion, this.tiempoPrestamo);
     }
 
+    public String setTiempoPrestamo(int tiempoPrestamo) {
+        this.tiempoPrestamo = tiempoPrestamo;
+        return "Diario";
+    }
 }

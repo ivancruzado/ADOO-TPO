@@ -9,7 +9,7 @@ import modelos.Prestamo;
 import modelos.Logger;
 import modelos.Socio;
 import modelos.dtos.PrestamoDTO;
-import modelos.dtos.SocioDTO;
+
 
 
 public class ControllerSocio {
@@ -37,8 +37,8 @@ public class ControllerSocio {
         return socioNuevo.getIdSocio();
     }
 
-    public List<String> getHistorialPrestamos(int idSocio) {
-        return getHistorialPrestamos(idSocio);//TODO implement here
+    public List<Prestamo> getHistorialPrestamos(int idSocio) {
+        return buscaSocio(idSocio).getPrestamosSocio();//TODO implement here
     }
 
     public void addPrestamo(int idSocio, Prestamo prestamo) {
