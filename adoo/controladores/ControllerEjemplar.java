@@ -35,6 +35,17 @@ public class ControllerEjemplar {
         return ejemplar.getIdEjemplar();
     }
 
+    public void modificarTiempoEjemplar(FactoryEjemplar factory, int tiempo) {
+        this.setFactoryEjemplar(factory);
+        String tipo = factory.setTiempoPrestamo(tiempo);
+        System.out.println("TIPO: " + factory);
+        System.out.println(tipo);
+        for (Ejemplar ejemplar : this.productos) {
+            if (ejemplar.getCategoria().equals(tipo))
+                ejemplar.setTiempoPrestamo(tiempo);
+        }
+    }
+
     public Boolean estadoEjemplar(int idEjemplar) {
         Ejemplar ejemplar = this.buscaEjemplar(idEjemplar);
         if (ejemplar != null){
@@ -113,4 +124,6 @@ public class ControllerEjemplar {
             return "Ejemplar no encontrado";
         return ejemplar.getAutor();
     }
+
+
 }

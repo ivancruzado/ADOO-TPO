@@ -7,5 +7,5 @@ public interface FactoryEjemplar {
 
     Ejemplar crearEjemplar(String titulo, String autor, Date fechaPublicacion);
 
-    
+    public String setTiempoPrestamo(int tiempoPrestamo);
 }
