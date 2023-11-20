@@ -1,6 +1,7 @@
 package test;
 
 import java.util.*;
+import java.util.ResourceBundle.Control;
 
 import color.ConsoleColors;
 
@@ -21,29 +22,57 @@ import decorator.busqueda.*;
 import enums.MetodoEnvio;
 
 public class App {
-
+    
     public static void main(String[] args) throws Exception {
 
         ControllerEjemplar controladorEjemplar = ControllerEjemplar.getInstancia();
-
         ControllerPrestamo controladorPrestamo = ControllerPrestamo.getInstancia();
-
         ControllerSocio controladorSocio = ControllerSocio.getInstancia();
-        
-        // Crea un ejemplar de Revista
-        // int revista = controladorEjemplar.crearEjemplar(new FactoryRevista(), "Revista A", "Autor Revista", new Date());
-        //     // Crea un ejemplar de Diario
-        // int diario = controladorEjemplar.crearEjemplar(new FactoryDiario(), "Diario A", "Autor Diario", new Date());
-
-        // int libro = controladorEjemplar.crearEjemplar(new FactoryLibro(), "Libro A", "Autor Libro", new Date());
-
-        // int revistaEspecializada = controladorEjemplar.crearEjemplar(new FactoryRevistaEspecializada(), "Revista Especializada A", "Autor Revista Especializada", new Date());
-
+        Escaner controladorScanner = Escaner.getInstancia();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-
+        formatoFecha.setLenient(false);
         ArrayList<Integer> ejemplares = new ArrayList<>();
+        String input, modo;
+        
 
-            // Crear ejemplares de libros y revistas reales
+        System.out.println("Utilizar modo ejemplo? (S/N)");
+        while(!(modo = controladorScanner.proxLinea().toUpperCase()).equals("S") && !modo.equals("N")){ 
+            System.out.println("Utilizar modo ejemplo? (S/N)");
+        }
+
+        // Crear ejemplares
+        cargarEjemplares(controladorEjemplar, controladorScanner, formatoFecha, ejemplares);
+
+        busqueda(controladorEjemplar, controladorScanner, formatoFecha, modo);
+        
+        
+        // Crea un socio
+        int socio = controladorSocio.crearSocio("Manuel", "Vidal", "12345678", "manvidal@uade.edu.ar", "12345678", MetodoEnvio.Email, new Logger(new ArrayList<>()));
+
+        controladorSocio.estadoSocio(socio);
+
+        int prestamo = controladorSocio.solicitarPrestamo(new Date(), "Tengo un motivo", socio, ejemplares.get(0));
+
+        System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
+        
+        System.out.println(controladorEjemplar.localizarEjemplar(ejemplares.get(0)));
+
+        //Quién tiene el ejemplar
+        System.out.println(controladorSocio.nombre(controladorPrestamo.socio(controladorPrestamo.encontrarEjemplar(ejemplares.get(0)))));
+
+        //System.out.println("Fecha revista: " + controladorEjemplar.fecha(revista));        
+
+    }
+
+
+
+
+
+
+
+
+
+    public static void cargarEjemplares(ControllerEjemplar controladorEjemplar, Escaner controladorScanner, SimpleDateFormat formatoFecha, ArrayList<Integer> ejemplares) throws Exception{
         ejemplares.add(controladorEjemplar.crearEjemplar(new FactoryRevista(), "National Geographic", "National Geographic Society", formatoFecha.parse("01/01/2018")));
         ejemplares.add(controladorEjemplar.crearEjemplar(new FactoryRevista(), "Time", "Time Inc.", formatoFecha.parse("01/01/2019")));
         ejemplares.add(controladorEjemplar.crearEjemplar(new FactoryRevista(), "The New Yorker", "Condé Nast", formatoFecha.parse("01/01/2020")));
@@ -68,60 +97,89 @@ public class App {
         ejemplares.add(controladorEjemplar.crearEjemplar(new FactoryRevistaEspecializada(), "IEEE Spectrum", "Institute of Electrical and Electronics Engineers", formatoFecha.parse("04/04/2021")));
         ejemplares.add(controladorEjemplar.crearEjemplar(new FactoryRevistaEspecializada(), "Journal of the American Medical Association (JAMA)", "American Medical Association", formatoFecha.parse("04/04/2022")));
 
-        controladorEjemplar.crearEjemplar(new FactoryLibro(), "Libro B", "Autor LibroB", new Date());
-
+        
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------------Listado de ejemplares---------------------" + ConsoleColors.RESET);
+        controladorScanner.proxLinea();
         for (Integer ejemplar : ejemplares) {
             System.out.println(controladorEjemplar.titulo(ejemplar) + " de " + controladorEjemplar.autor(ejemplar) + ". Este ejemplar es un/a: " + controladorEjemplar.categoria(ejemplar) + " y su tiempo de prestamo es de " + controladorEjemplar.tiempoPrestamo(ejemplar) + " días." + "\n");
         }
+    }
 
+
+
+
+
+    public static void busqueda(ControllerEjemplar controladorEjemplar, Escaner controladorScanner, SimpleDateFormat formatoFecha, String modo) throws Exception{
+        String input;
+        ArrayList<EjemplarDTO> ejemplaresEncontrados;
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------------Busqueda por Autor---------------------" + ConsoleColors.RESET);
+        System.out.println("Ingrese el autor a buscar: ");
+        input = controladorScanner.proxLinea();
+        
+        if(modo.equals("S")){
+            System.out.println("Ejemplo: Miguel");
+            input = "Miguel";
+        }
+            
 
         Busqueda buscarAutor = new BusquedaAutor(controladorEjemplar.listadoEjemplares());
-        ArrayList<EjemplarDTO> ejemplaresEncontrados = buscarAutor.buscarEjemplar("Miguel");
+        ejemplaresEncontrados = buscarAutor.buscarEjemplar(input);
 
-        System.out.println("\nBusqueda por Autor: Ejemplares encontrados: ");
+        System.out.println("Ejemplares encontrados: ");
         for (EjemplarDTO ejemplarDTO : ejemplaresEncontrados) {
             System.out.println(ejemplarDTO.getTitulo());
         }
 
+        
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------------Busqueda por Titulo---------------------" + ConsoleColors.RESET);
+        System.out.println("Ingrese el titulo a buscar: ");
+        input = controladorScanner.proxLinea();
+        
+        if(modo.equals("S")){
+            System.out.println("Ejemplo: " + ConsoleColors.GREEN + "la" + ConsoleColors.RESET);
+            input = "la";
+        }
+        
         Busqueda buscarTitulo = new BusquedaTitulo(controladorEjemplar.listadoEjemplares());
-        ejemplaresEncontrados = buscarTitulo.buscarEjemplar("la");
+        ejemplaresEncontrados = buscarTitulo.buscarEjemplar(input);
 
-        System.out.println("\nBusqueda por Titulo: Ejemplares encontrados: ");
+        System.out.println("Ejemplares encontrados: ");
         for (EjemplarDTO ejemplarDTO : ejemplaresEncontrados) {
-            System.out.println(ejemplarDTO.getTitulo());
+            System.out.println(ConsoleColors.GREEN_BOLD + ejemplarDTO.getTitulo() + ConsoleColors.RESET);
         }
+
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------------Busqueda por Categoria---------------------" + ConsoleColors.RESET);
+        System.out.println("Ingrese la categoria a buscar: Diario / Libro / Revista / Revista Especializada");
+        input = controladorScanner.proxLinea();
+        
+        if(modo.equals("S")){
+            System.out.println("Ejemplo: " + ConsoleColors.GREEN_BOLD + "Revista" + ConsoleColors.RESET);
+            input = "Revista Esp";
+        }        
 
         Busqueda buscarCategoria = new BusquedaCategoria(controladorEjemplar.listadoEjemplares());
-        ejemplaresEncontrados = buscarCategoria.buscarEjemplar("Revista");
+        ejemplaresEncontrados = buscarCategoria.buscarEjemplar(input);
 
-        System.out.println("\nBusqueda por Categoria: Ejemplares encontrados: ");
+        System.out.println("Busqueda por Categoria: Ejemplares encontrados: ");
         for (EjemplarDTO ejemplarDTO : ejemplaresEncontrados) {
-            System.out.println(ejemplarDTO.getTitulo());
+            System.out.println(ConsoleColors.GREEN_BOLD + ejemplarDTO.getTitulo() + ConsoleColors.RESET);
+        }
+
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------------Busqueda por Fecha---------------------" + ConsoleColors.RESET);
+        System.out.println("Ingrese la fecha a buscar: formato dd/mm/yyyy");
+        input = controladorScanner.proxLinea();
+        
+        if(modo.equals("S")){
+            System.out.println("Ejemplo: " + ConsoleColors.GREEN_BOLD + "01/01/2018" + ConsoleColors.RESET);
+            input = "01/01/2018";
         }
 
         Busqueda buscarFechaPublicacion = new BusquedaFechaPublicacion(controladorEjemplar.listadoEjemplares());
-        ejemplaresEncontrados = buscarFechaPublicacion.buscarEjemplar(formatoFecha.parse("01/01/2018"));
+        ejemplaresEncontrados = buscarFechaPublicacion.buscarEjemplar(formatoFecha.parse(input));
 
-        System.out.println("\nBusqueda por Fecha de Publicacion: Ejemplares encontrados: ");
+        System.out.println("Busqueda por Fecha de Publicacion: Ejemplares encontrados: ");
         for (EjemplarDTO ejemplarDTO : ejemplaresEncontrados) {
             System.out.println(ejemplarDTO.getTitulo());
         }
-
-        // Crea un socio
-        int socio = controladorSocio.crearSocio("Manuel", "Vidal", "12345678", "manvidal@uade.edu.ar", "12345678", MetodoEnvio.Email, new Logger(new ArrayList<>()));
-
-        controladorSocio.estadoSocio(socio);
-
-         int prestamo = controladorSocio.solicitarPrestamo(new Date(), "Tengo un motivo", socio, ejemplares.get(0));
-
-        System.out.println("El prestamo es de: " + controladorSocio.nombre(controladorPrestamo.socio(prestamo)));
-        
-        System.out.println(controladorEjemplar.localizarEjemplar(ejemplares.get(0)));
-
-        //Quién tiene el ejemplar
-        System.out.println(controladorSocio.nombre(controladorPrestamo.socio(controladorPrestamo.encontrarEjemplar(ejemplares.get(0)))));
-
-        //System.out.println("Fecha revista: " + controladorEjemplar.fecha(revista));        
-
     }
 }

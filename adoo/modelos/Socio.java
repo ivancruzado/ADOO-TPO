@@ -127,7 +127,8 @@ public class Socio implements IAdapterAutenticador {
 
 
     public void addPrestamosSocio(Prestamo prestamo) {
-        if (prestamosSocio == null) prestamosSocio = new ArrayList<>();
+        if (prestamosSocio == null) 
+            prestamosSocio = new ArrayList<>();
         this.prestamosSocio.add(prestamo);
     }
 

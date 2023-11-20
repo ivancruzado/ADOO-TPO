@@ -16,7 +16,7 @@ public class BusquedaTitulo extends Busqueda {
             String titulo = (String) criterio;
             ArrayList<EjemplarDTO> ejemplaresEncontrados = new ArrayList<EjemplarDTO>();
             for (EjemplarDTO ejemplar : this.ejemplares) {
-                if (ejemplar.getTitulo().contains(titulo)) {
+                if (ejemplar.getTitulo().toUpperCase().contains(titulo.toUpperCase())) {
                     ejemplaresEncontrados.add(ejemplar);
                 }
             }

@@ -16,7 +16,7 @@ public class ControllerSocio {
 
 
     private static ControllerSocio instancia;
-    private static List<Socio> socios;
+    private List<Socio> socios;
 
     private ControllerSocio() {
         socios = new ArrayList<>();
@@ -38,12 +38,16 @@ public class ControllerSocio {
     }
 
     public List<String> getHistorialPrestamos(int idSocio) {
-        return getHistorialPrestamos(idSocio);
+        return getHistorialPrestamos(idSocio);//TODO implement here
     }
 
     public void addPrestamo(int idSocio, Prestamo prestamo) {
         Socio socio = buscaSocio(idSocio);
         socio.addPrestamosSocio(prestamo);
+    }
+
+    public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
+        return ControllerPrestamo.getInstancia().solicitarPrestamo(fechaPrestamo, motivo, idSocio, idEjemplar);
     }
 
     public void modificarMailSocio(int idSocio, String nombre) {
@@ -129,7 +133,5 @@ public class ControllerSocio {
 
 
     
-    public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
-        return ControllerPrestamo.getInstancia().solicitarPrestamo(fechaPrestamo, motivo, idSocio, idEjemplar);
-    }
+
 }
