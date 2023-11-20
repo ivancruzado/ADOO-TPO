@@ -29,6 +29,7 @@ public class PrestamoDTO {
 
     //TODO revisar que tenga sentido
     public Boolean devolvioATiempo() {
+        if (fechaDevolucion == null) return Boolean.FALSE;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaPrestamo);
         calendar.add(Calendar.DAY_OF_YEAR, this.tiempoPrestamoBase);
