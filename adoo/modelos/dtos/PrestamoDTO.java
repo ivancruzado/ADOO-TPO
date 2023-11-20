@@ -39,7 +39,11 @@ public class PrestamoDTO {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaPrestamo);
         calendar.add(Calendar.DAY_OF_YEAR, this.tiempoPrestamoBase);
-        return (int) ((this.fechaDevolucion.getTime() - calendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
+        //Si fechaDevolucion es null devolver devolver la fecha actual menos calendar.
+        if (this.fechaDevolucion == null)
+            return (int) ((new Date().getTime() - calendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
+        else
+            return (int) ((this.fechaDevolucion.getTime() - calendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
     }
 
     public int getIdPrestamo() {
