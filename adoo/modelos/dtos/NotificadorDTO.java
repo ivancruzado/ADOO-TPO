@@ -7,19 +7,19 @@ import enums.MotivoNotificacion;
  */
 public class NotificadorDTO {
 
-    private SocioDTO socioDTO;
+    private int socioDTO;
     private String mensaje;
     private Date fecha;
     private MotivoNotificacion motivoNotificacion;
 
-    public NotificadorDTO(String mensaje, Date fecha, MotivoNotificacion motivoNotificacion, SocioDTO socioDTO) {
+    public NotificadorDTO(String mensaje, Date fecha, MotivoNotificacion motivoNotificacion, int socioDTO) {
         this.mensaje = mensaje;
         this.fecha = fecha;
         this.motivoNotificacion = motivoNotificacion;
         this.socioDTO = socioDTO;
     }
 
-    public SocioDTO getDestinatario() {
+    public int getDestinatario() {
         return socioDTO;
     }
 
@@ -35,9 +35,9 @@ public class NotificadorDTO {
         return motivoNotificacion;
     }
 
-    public void setDestinatario(SocioDTO socioDTO) {
+    /*public void setDestinatario(SocioDTO socioDTO) {
         this.socioDTO = socioDTO;
-    }
+    }*/
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;

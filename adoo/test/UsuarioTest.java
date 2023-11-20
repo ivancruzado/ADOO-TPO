@@ -61,4 +61,5 @@ class UsuarioTest {
         Assertions.assertTrue(prestamoPositivo<prestamoPositivo2);
     }
 
+
 }

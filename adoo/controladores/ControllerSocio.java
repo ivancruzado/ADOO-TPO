@@ -114,6 +114,11 @@ public class ControllerSocio {
         return socio.getNombre();
     }
 
+    public MetodoEnvio metodoEnvio(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        return socio.getMetodoEnvio();
+    }
+
     public void aumentarPrestamoPositivo(int idSocio) {
         for (Socio socio : socios) {
             if (socio.getIdSocio() == idSocio) {
