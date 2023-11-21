@@ -2,6 +2,11 @@ package modelos;
 
 import java.util.*;
 
+import estrategias.notificador.EstrategiaNotificador;
+import estrategias.notificador.SMS;
+import estrategias.notificador.Whatsapp;
+import estrategias.notificador.Email;
+import modelos.dtos.NotificadorDTO;
 import modelos.dtos.PrestamoDTO;
 
 public class Prestamo {
@@ -15,17 +20,36 @@ public class Prestamo {
     private int idSocio;
     private int idEjemplar;
     private Notificador notificacion;
-    private interfaz.IStatePrestamo estadoPrestamo;
     
     public Prestamo(int tiempoPrestamoBase, Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
+
         this.idPrestamo = contadorIdPrestamo++;
         this.tiempoPrestamoBase = tiempoPrestamoBase;
         this.fechaPrestamo = fechaPrestamo;
         this.motivo = motivo;
         this.idSocio = idSocio;
         this.idEjemplar = idEjemplar;
-        //this.notificacion = new Notificador();
+        this.notificacion = new Notificador(new SMS());
     }
+
+
+    public void enviarNotificacion(NotificadorDTO notificacion){
+        switch (notificacion.getDestinatario().getMetodoEnvio()) {
+            case SMS:
+                this.notificacion.setearEstrategia(new SMS());    
+                break;
+            case Email:
+                this.notificacion.setearEstrategia(new Email());
+                break;
+            case Whatsapp:
+                this.notificacion.setearEstrategia(new Whatsapp());
+                break;
+            default:
+                break;
+        }
+        this.notificacion.enviarNotificacion(notificacion);
+    }
+
 
     public PrestamoDTO toDTO() {
         return new PrestamoDTO(this.idPrestamo, this.tiempoPrestamoBase, this.fechaPrestamo, this.fechaDevolucion, this.motivo, this.idSocio, this.idEjemplar, this.notificacion);

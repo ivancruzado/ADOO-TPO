@@ -102,16 +102,51 @@ public class ControllerSocio {
         return null;
     }
 
-    public void buscarEjemplar(int idEjemplar) {
-        // TODO implement here
+    public SocioDTO getSocioDTO(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        return socio.toDTO();
     }
-
 
     public String nombre(int idSocio) {
         Socio socio = buscaSocio(idSocio);
         if (socio == null)
             return "No existe el socio";
         return socio.getNombre();
+    }
+
+    public String apellido(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getApellido();
+    }
+
+    public String dni(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getDni();
+    }
+
+    public String mail(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getEmail();
+    }
+
+    public String telefono(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getTelefono();
+    }
+
+    public String metodoEnvioS(int idSocio) {
+        Socio socio = buscaSocio(idSocio);
+        if (socio == null)
+            return "No existe el socio";
+        return socio.getMetodoEnvio().toString();
     }
 
     public MetodoEnvio metodoEnvio(int idSocio) {

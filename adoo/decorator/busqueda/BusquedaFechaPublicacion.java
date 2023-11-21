@@ -13,7 +13,6 @@ public class BusquedaFechaPublicacion extends Busqueda {
         super(ejemplares);
     }    
 
-    //TODO: Deberiamos usar DTO para devolver los ejemplares encontrados
     public ArrayList<EjemplarDTO> buscarEjemplar(Object criterio){
         if (criterio instanceof Date) {
             Date fecha = (Date) criterio;

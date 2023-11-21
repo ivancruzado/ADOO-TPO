@@ -7,8 +7,12 @@ import chain.prestamo.CalcularTiempoPrestamoBuenComportamiento;
 import chain.prestamo.CalcularTiempoPrestamoEjemplar;
 import chain.prestamo.CalcularTiempoPrestamoPenalizacion;
 import modelos.Prestamo;
+import modelos.Socio;
+import modelos.dtos.NotificadorDTO;
 import modelos.dtos.PrestamoDTO;
+import modelos.dtos.SocioDTO;
 import controladores.ControllerSocio;
+import enums.MotivoNotificacion;
 
 public class ControllerPrestamo {
 
@@ -30,6 +34,13 @@ public class ControllerPrestamo {
         if (instancia == null)
             instancia = new ControllerPrestamo();
         return instancia;
+    }
+
+    public void enviarNotificacion(int idPrestamo, String mensaje, Date fecha, MotivoNotificacion motivoNotificacion) {
+        Prestamo prestamo = buscaPrestamo(idPrestamo);
+        SocioDTO socioDTO = ControllerSocio.getInstancia().getSocioDTO(prestamo.getIdSocio());
+        NotificadorDTO notificacion = new NotificadorDTO(mensaje, fecha, motivoNotificacion, socioDTO);
+        prestamo.enviarNotificacion(notificacion);
     }
 
     public int solicitarPrestamo(Date fechaPrestamo, String motivo, int idSocio, int idEjemplar) {
