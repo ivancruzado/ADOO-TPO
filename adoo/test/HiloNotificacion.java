@@ -1,6 +1,7 @@
 package test;
 
 import controladores.ControllerSocio;
+import enums.MetodoEnvio;
 import enums.MotivoNotificacion;
 import estrategias.notificador.Email;
 import estrategias.notificador.EstrategiaNotificador;
@@ -14,7 +15,14 @@ import java.util.Date;
 class HiloNotificacion extends Thread {
     @Override
     public void run(){
-        NotificadorDTO noti = new NotificadorDTO("prestamo vencido",new Date(),MotivoNotificacion.fechaDeVencimientoProxima,1);
+        MetodoEnvio metodoEnvio = ControllerSocio.getInstancia().metodoEnvio(1);
+        SocioDTO socio = null;
+        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO(1)) {
+            if(socioDTO.getIdSocio() == 1){
+                socio = socioDTO;
+            }
+        }
+        NotificadorDTO noti = new NotificadorDTO("prestamo vencido",new Date(),MotivoNotificacion.fechaDeVencimientoProxima,socio);
         EstrategiaNotificador estrategia = new Email();
         estrategia.enviarNotificacion(noti);
         System.out.println(noti);

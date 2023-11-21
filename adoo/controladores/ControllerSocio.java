@@ -9,7 +9,7 @@ import modelos.Prestamo;
 import modelos.Logger;
 import modelos.Socio;
 import modelos.dtos.PrestamoDTO;
-
+import modelos.dtos.SocioDTO;
 
 
 public class ControllerSocio {
@@ -136,7 +136,17 @@ public class ControllerSocio {
         return -1;
     }
 
+    public List<SocioDTO> getSociosDTO(int idSocio) {
+        ArrayList<SocioDTO> socioDTO = new ArrayList<SocioDTO>();
+        for (Socio socio : this.socios) {
+            if (socio.getIdSocio() == idSocio)
+                socioDTO.add((socio.toDTO()));
 
-    
+        }
+        return socioDTO;
+
+    }
+
+
 
 }

@@ -81,6 +81,8 @@ public class App {
 
         //enviar notificacion segun metodo elegido por el socio
         enviarNotificacion(1,"Prestamo proximo a vencer",MotivoNotificacion.fechaDeVencimientoProxima);
+        
+        
     }
 
 
@@ -234,7 +236,13 @@ public class App {
 
     public static void enviarNotificacion(int IdSocio,String mensaje,MotivoNotificacion motivo){
         MetodoEnvio metodoEnvio = ControllerSocio.getInstancia().metodoEnvio(IdSocio);
-        NotificadorDTO noti = new NotificadorDTO(mensaje,new Date(), motivo,IdSocio);
+        SocioDTO socio = null;
+        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO(IdSocio)) {
+            if(socioDTO.getIdSocio() == IdSocio){
+                socio = socioDTO;
+            }
+        }
+        NotificadorDTO noti = new NotificadorDTO(mensaje,new Date(), motivo,socio);
         if(metodoEnvio == MetodoEnvio.SMS ){
             EstrategiaNotificador estrategia = new SMS();
             estrategia.enviarNotificacion(noti);
