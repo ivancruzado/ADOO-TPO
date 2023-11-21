@@ -17,7 +17,7 @@ class HiloNotificacion extends Thread {
     public void run(){
         MetodoEnvio metodoEnvio = ControllerSocio.getInstancia().metodoEnvio(1);
         SocioDTO socio = null;
-        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO(1)) {
+        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO()) {
             if(socioDTO.getIdSocio() == 1){
                 socio = socioDTO;
             }

@@ -136,14 +136,12 @@ public class ControllerSocio {
         return -1;
     }
 
-    public List<SocioDTO> getSociosDTO(int idSocio) {
-        ArrayList<SocioDTO> socioDTO = new ArrayList<SocioDTO>();
+    public List<SocioDTO> getSociosDTO() {
+        ArrayList<SocioDTO> sociosDTO = new ArrayList<SocioDTO>();
         for (Socio socio : this.socios) {
-            if (socio.getIdSocio() == idSocio)
-                socioDTO.add((socio.toDTO()));
-
+                sociosDTO.add(socio.toDTO());
         }
-        return socioDTO;
+        return sociosDTO;
 
     }
 

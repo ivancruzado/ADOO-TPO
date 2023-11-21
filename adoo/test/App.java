@@ -79,8 +79,9 @@ public class App {
 
         //System.out.println("Fecha revista: " + controladorEjemplar.fecha(revista));
 
+
         //enviar notificacion segun metodo elegido por el socio
-        enviarNotificacion(1,"Prestamo proximo a vencer",MotivoNotificacion.fechaDeVencimientoProxima);
+        enviarNotificacion(2,"Prestamo proximo a vencer",MotivoNotificacion.fechaDeVencimientoProxima);
         
         
     }
@@ -235,25 +236,30 @@ public class App {
     }
 
     public static void enviarNotificacion(int IdSocio,String mensaje,MotivoNotificacion motivo){
-        MetodoEnvio metodoEnvio = ControllerSocio.getInstancia().metodoEnvio(IdSocio);
+
         SocioDTO socio = null;
-        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO(IdSocio)) {
+        for (SocioDTO socioDTO : ControllerSocio.getInstancia().getSociosDTO()) {
             if(socioDTO.getIdSocio() == IdSocio){
                 socio = socioDTO;
             }
         }
-        NotificadorDTO noti = new NotificadorDTO(mensaje,new Date(), motivo,socio);
-        if(metodoEnvio == MetodoEnvio.SMS ){
-            EstrategiaNotificador estrategia = new SMS();
-            estrategia.enviarNotificacion(noti);
-        }
-        else if(metodoEnvio == MetodoEnvio.Email ){
-            EstrategiaNotificador estrategia = new Email();
-            estrategia.enviarNotificacion(noti);
-        }
-        else if(metodoEnvio == MetodoEnvio.Whatsapp ){
-            EstrategiaNotificador estrategia = new Whatsapp();
-            estrategia.enviarNotificacion(noti);
+        if(socio != null){
+            MetodoEnvio metodoEnvio = ControllerSocio.getInstancia().metodoEnvio(IdSocio);
+            NotificadorDTO noti = new NotificadorDTO(mensaje,new Date(), motivo,socio);
+            if(metodoEnvio == MetodoEnvio.SMS ){
+                EstrategiaNotificador estrategia = new SMS();
+                estrategia.enviarNotificacion(noti);
+            }
+            else if(metodoEnvio == MetodoEnvio.Email ){
+                EstrategiaNotificador estrategia = new Email();
+                estrategia.enviarNotificacion(noti);
+            }
+            else if(metodoEnvio == MetodoEnvio.Whatsapp ){
+                EstrategiaNotificador estrategia = new Whatsapp();
+                estrategia.enviarNotificacion(noti);
+        }}
+        else{
+            System.out.println("No se puede enviar. El usuario no existe");
         }
 
     }
